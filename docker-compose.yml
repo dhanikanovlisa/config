@@ -1,0 +1,46 @@
+services:
+  notflix-app:
+    extends:
+      file: ../notflix-php-app/docker-compose.yml
+      service: notflix-app
+    networks:
+      - app-tier
+  php-db:
+    extends:
+      file: ../notflix-php-app/docker-compose.yml
+      service: php-db
+    networks:
+      - app-tier
+  notflix-premium-app:
+    extends:
+      file: ../notflix-premium-app/docker-compose.yml
+      service: notflix-premium
+    networks:
+      - app-tier
+  rest-service:
+    extends:
+      file: ../rest-service/docker-compose.yml
+      service: rest-api
+    networks:
+      - app-tier
+  rest-db:
+    extends:
+      file: ../rest-service/docker-compose.yml
+      service: rest-db
+    networks:
+      - app-tier
+  soap-service:
+    extends:
+      file: ../soap-service/docker-compose.yml
+      service: soap-service
+    networks:
+      - app-tier
+  soap-db:
+    extends:
+      file: ../soap-service/docker-compose.yml
+      service: soap-db
+    networks:
+      - app-tier
+networks:
+  app-tier:
+    driver: bridge
